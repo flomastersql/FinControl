@@ -5,3 +5,10 @@ C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.csproj.As
 C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.csproj.CoreCompileInputs.cache
 C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.exe
 C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.pdb
+C:\Projects\FinControl\FinControl\FinControl\bin\Debug\FinControl.exe.config
+C:\Projects\FinControl\FinControl\FinControl\bin\Debug\FinControl.exe
+C:\Projects\FinControl\FinControl\FinControl\bin\Debug\FinControl.pdb
+C:\Projects\FinControl\FinControl\FinControl\obj\Debug\FinControl.csprojAssemblyReference.cache
+C:\Projects\FinControl\FinControl\FinControl\obj\Debug\FinControl.csproj.CoreCompileInputs.cache
+C:\Projects\FinControl\FinControl\FinControl\obj\Debug\FinControl.exe
+C:\Projects\FinControl\FinControl\FinControl\obj\Debug\FinControl.pdb

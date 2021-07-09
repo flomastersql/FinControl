@@ -6,7 +6,7 @@ namespace FinControl
     {
             public static string[] ReadOrders()
             {
-                return File.ReadAllLines(@"D:\Documents\2 курс\Practice\ФоновоеОплаченныеЗаявкиПоКиСВФайл.txt");
+                return File.ReadAllLines(@"\\prog_1c.priminvestor.lan\КопииБазОбмен\ФоновоеОплаченныеЗаявкиПоКиСВФайл.TXT");
             }
     }
 }
