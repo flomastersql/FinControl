@@ -1,0 +1,7 @@
+C:\Users\billy\source\repos\FinControl\FinControl\bin\Debug\FinControl.exe.config
+C:\Users\billy\source\repos\FinControl\FinControl\bin\Debug\FinControl.exe
+C:\Users\billy\source\repos\FinControl\FinControl\bin\Debug\FinControl.pdb
+C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.csproj.AssemblyReference.cache
+C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.csproj.CoreCompileInputs.cache
+C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.exe
+C:\Users\billy\source\repos\FinControl\FinControl\obj\Debug\FinControl.pdb
