@@ -46,6 +46,8 @@ namespace FinControl
 
             // 4 фиксируем обнаруженные заведенные заяки (ставим update MAIN_TAB set [CHECK_STAT] = 1 на основе данных загруженных в пунктах 1, 3)
             DB.FindCreatedOrders();
+            
+            Console.WriteLine(DB.ShowLostedOrders());
 
             Console.WriteLine("ok");
             Console.ReadLine();

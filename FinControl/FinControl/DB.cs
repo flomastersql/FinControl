@@ -41,10 +41,12 @@ namespace FinControl
                 );
          }
 
-        public static void ShowLostedOrders()
+        public static string ShowLostedOrders()
         {
-            ExecSqlCommand(
-              "	select   CONVERT(varchar, row_number() over (order by mt.id)) + '. Объект: ' + 								 " +
+            string data = "";
+
+            DataTable dt = GetSqlInDataTable(
+            "	select   CONVERT(varchar, row_number() over (order by mt.id)) + '. Объект: ' + 								 " +
             "	o.NAME + ', Услуга: ' + s.NAME + ', Агент: ' 								 " +
             "	+ p.NAME + ' (д.контр: ' + CONVERT(varchar, mt.DAY_CTRL) + ' цена: ' + CONVERT(varchar, mt.price)								 " +
             "	+ ' свобода: ' + CONVERT(varchar, mt.tolerance_of_price) + ')' data								 " +
@@ -57,9 +59,15 @@ namespace FinControl
             "				where 					 " +
             "				so.name = 'Заведен'	 and mt.CHECK_STAT <> 1 				 " +
             "				and pc.PATTERN like '%,' + CONVERT(varchar, datepart(month, GETDATE())) + ',%'	 				 " +
-            "				and mt.DAY_CTRL <= datepart(day, GETDATE())	 				 " 
+            "				and mt.DAY_CTRL <= datepart(day, GETDATE())	 				 ");
 
-                );
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                data += "<br>" + dt.Rows[i][0].ToString();
+            }
+
+            return data;                
+
         }
 
         public static void ExecSqlCommand(string comm)
@@ -72,6 +80,17 @@ namespace FinControl
 
             scon.Close();
 
+        }
+
+        public static DataTable GetSqlInDataTable(string comm)
+        {
+            SqlDataAdapter sda = new SqlDataAdapter(comm, str);
+
+            DataTable DT = new DataTable();
+
+            sda.Fill(DT);
+
+            return DT;
         }
     }
 }
