@@ -25,7 +25,7 @@ namespace FinControl
             //"	 взяли заявки которые нужно проверить на существование в БИТ	 " +
             "	so.name = 'Заведен'	 " +
             //"	 и при этом только те что надо проверять на текущий день	 " +
-            "	and mt.DAY_CTRL <= datepart(day, GETDATE()+3)	 " +
+            "	and mt.DAY_CTRL <= datepart(day, GETDATE())	 " +
             //"	 и которые до настоящего момент не проверены	 " +
             "	and mt.CHECK_STAT <> 1 	 " +
             //"	 и которые вобще нужно в этом месяце проверять	 " +
@@ -38,12 +38,37 @@ namespace FinControl
             "	convert(int, SUBSTRING(convert(varchar,mt.price), 1, len(convert(varchar,mt.price)) - mt.tolerance_of_price) + REPLICATE('0', mt.tolerance_of_price))+ convert(int, '1' + REPLICATE('0', mt.tolerance_of_price))	 " +
             "		 " +
             "	)	 " 
-
-
                 );
-
          }
 
+        public static string ShowLostedOrders()
+        {
+            string data = "";
+
+            DataTable dt = GetSqlInDataTable(
+            "	select   CONVERT(varchar, row_number() over (order by mt.id)) + '. Объект: ' + 								 " +
+            "	o.NAME + ', Услуга: ' + s.NAME + ', Агент: ' 								 " +
+            "	+ p.NAME + ' (д.контр: ' + CONVERT(varchar, mt.DAY_CTRL) + ' цена: ' + CONVERT(varchar, mt.price)								 " +
+            "	+ ' свобода: ' + CONVERT(varchar, mt.tolerance_of_price) + ')' data								 " +
+            "	from 	 							 " +
+            "	[dbo].[MAIN_TAB] mt join [dbo].[STAT_ORDERS] so on mt.ID_STAT = so.ID 								 " +
+            "				join [dbo].[PROV] p on mt.ID_PROV = p.ID 					 " +
+            "				join [dbo].[OBJ] o on mt.ID_OBJ = o.ID 	 				 " +
+            "				join [dbo].[SERV] s on mt.ID_SERV = s.ID  	 				 " +
+            "				join [dbo].[PERIOD_CTRL] pc on mt.ID_PERIOD_CTRL = pc.ID					 " +
+            "				where 					 " +
+            "				so.name = 'Заведен'	 and mt.CHECK_STAT <> 1 				 " +
+            "				and pc.PATTERN like '%,' + CONVERT(varchar, datepart(month, GETDATE())) + ',%'	 				 " +
+            "				and mt.DAY_CTRL <= datepart(day, GETDATE())	 				 ");
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                data += "<br>" + dt.Rows[i][0].ToString();
+            }
+
+            return data;                
+
+        }
 
         public static void ExecSqlCommand(string comm)
         {
@@ -55,6 +80,17 @@ namespace FinControl
 
             scon.Close();
 
+        }
+
+        public static DataTable GetSqlInDataTable(string comm)
+        {
+            SqlDataAdapter sda = new SqlDataAdapter(comm, str);
+
+            DataTable DT = new DataTable();
+
+            sda.Fill(DT);
+
+            return DT;
         }
     }
 }
